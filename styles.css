@@ -1,0 +1,333 @@
+/* --- CSS VARIABLES (Wired for easy JavaScript Dark/Light switching) --- */
+:root {
+    --bg-base: #0A0E17;
+    --bg-glass: rgba(19, 27, 43, 0.65);
+    --glass-border: rgba(255, 197, 0, 0.25);
+    --text-main: #F1F5F9;
+    --text-muted: #94A3B8;
+    --gold: #FFC500;
+    --gold-glow: rgba(255, 197, 0, 0.4);
+    --patronus-blue: #00E5FF;
+    --howler-bg: rgba(139, 0, 0, 0.18);
+    --howler-border: #8B0000;
+}
+
+/* Light Mode Overrides (Triggered by the Lumos button) */
+body.lumos-active {
+    --bg-base: #F4EAD4;
+    --bg-glass: rgba(255, 255, 255, 0.6);
+    --glass-border: rgba(184, 134, 11, 0.4);
+    --text-main: #1A1D20;
+    --text-muted: #4A5568;
+    --gold: #B8860B;
+    --gold-glow: rgba(184, 134, 11, 0.3);
+    --howler-bg: rgba(220, 38, 38, 0.12);
+    --howler-border: #DC2626;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-base);
+    color: var(--text-main);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    transition: background-color 0.6s ease, color 0.6s ease;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, .nav-logo, .mischief {
+    font-family: 'Cinzel', serif;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 6rem 1.5rem;
+}
+
+/* Glassmorphism Standard */
+.glass-panel {
+    background: var(--bg-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+}
+
+/* --- NAVBAR --- */
+nav {
+    position: fixed;
+    top: 0; left: 0; width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+    background: rgba(10, 14, 23, 0.8);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 197, 0, 0.15);
+}
+
+.nav-logo {
+    font-size: 1.6rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: var(--gold);
+}
+.nav-logo span { color: var(--patronus-blue); }
+
+.nav-links a {
+    color: var(--text-main);
+    text-decoration: none;
+    margin: 0 1.2rem;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--gold); }
+
+.spell-btn {
+    background: linear-gradient(135deg, var(--patronus-blue), #0077ff);
+    border: none;
+    padding: 8px 18px;
+    border-radius: 20px;
+    color: #000;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+    transition: all 0.3s;
+}
+.spell-btn:hover { transform: scale(1.05); }
+
+/* --- HERO SECTION --- */
+#hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
+
+.glitch-title {
+    font-size: 4.5rem;
+    font-weight: 900;
+    color: var(--gold);
+    text-shadow: 0 0 30px var(--gold-glow);
+    line-height: 1.1;
+    margin-bottom: 1rem;
+}
+
+.subtitle {
+    font-size: 1.4rem;
+    letter-spacing: 4px;
+    color: var(--patronus-blue);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+}
+
+.tagline {
+    font-style: italic;
+    color: var(--text-muted);
+    margin-bottom: 2.5rem;
+}
+
+.map-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    border: 2px solid var(--gold);
+    color: var(--gold);
+    text-decoration: none;
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    letter-spacing: 2px;
+    border-radius: 4px;
+    position: relative;
+    transition: all 0.3s;
+}
+
+.footprints {
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.map-btn:hover {
+    background: var(--gold);
+    color: #000;
+    box-shadow: 0 0 25px var(--gold);
+}
+.map-btn:hover .footprints { opacity: 1; }
+
+/* Great Hall Candles Animation */
+.candle-container {
+    position: absolute; width: 100%; height: 100%; pointer-events: none; z-index: 1;
+}
+.candle {
+    position: absolute; width: 8px; height: 18px; background: #ffffdd;
+    border-radius: 4px; box-shadow: 0 0 12px #ffaa00;
+    animation: floatCandle 4s infinite ease-in-out alternate;
+}
+@keyframes floatCandle {
+    0% { transform: translateY(0px); opacity: 0.8;}
+    100% { transform: translateY(-20px); opacity: 1;}
+}
+
+/* --- SECTION HEADERS --- */
+.section-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+}
+.section-header h2 { font-size: 2.2rem; color: var(--gold); letter-spacing: 2px;}
+.section-header p { color: var(--text-muted); font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px;}
+
+/* --- ABOUT SECTION --- */
+.about-card {
+    padding: 2.5rem;
+    font-size: 1.15rem;
+    line-height: 1.8;
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* --- MOVING PORTRAITS (POSTER GRID) --- */
+.poster-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.poster-card {
+    padding: 1rem;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    display: flex; flex-direction: column;
+}
+.poster-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 30px var(--gold-glow);
+    border-color: var(--gold);
+}
+
+.poster-img-box {
+    width: 100%;
+    height: 380px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    background: #111;
+}
+.poster-img-box img {
+    width: 100%; height: 100%; object-fit: cover;
+}
+
+.poster-card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--text-main); }
+.poster-meta { font-size: 0.85rem; color: var(--gold); font-style: italic; margin-top: auto; }
+
+.featured-poster { border: 2px solid var(--gold); }
+
+/* --- HOWLERS (ISSUES) --- */
+.howler-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;
+}
+.howler-card {
+    padding: 1.8rem;
+    background: var(--howler-bg);
+    border-color: var(--howler-border);
+    position: relative;
+}
+.howler-badge {
+    position: absolute; top: -10px; left: 20px;
+    background: var(--howler-border); color: #fff;
+    font-size: 0.7rem; font-weight: 700; padding: 3px 8px; border-radius: 4px;
+    letter-spacing: 1px;
+}
+.howler-card h3 { margin: 1rem 0 0.5rem 0; color: #ff6b6b; }
+.howler-card p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1.5rem; }
+
+.howler-footer {
+    display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: #a0aec0;
+}
+.wand-btn {
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+    color: var(--text-main); padding: 5px 12px; border-radius: 15px; cursor: pointer;
+    transition: all 0.2s;
+}
+.wand-btn:hover, .wand-btn.voted {
+    background: var(--patronus-blue); color: #000; border-color: var(--patronus-blue);
+    box-shadow: 0 0 10px var(--patronus-blue);
+}
+
+/* --- MUSIC PLAYER (WWN) --- */
+.music-player-card {
+    display: flex; align-items: center; padding: 2.5rem; gap: 3rem;
+}
+.player-left { flex-shrink: 0; }
+.pensieve-bowl {
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, var(--patronus-blue) 0%, #06152d 60%, #02050c 100%);
+    box-shadow: 0 0 30px rgba(0, 229, 255, 0.5);
+    border: 3px solid #475569;
+    position: relative; overflow: hidden;
+}
+.magic-swirl {
+    position: absolute; width: 100%; height: 100%;
+    background: repeating-conic-gradient(from 0deg at 50% 50%, rgba(255,255,255,0.2) 0deg, transparent 60deg, rgba(255,255,255,0.2) 120deg);
+    animation: spinBowl 10s linear infinite;
+}
+@keyframes spinBowl { 100% { transform: rotate(360deg); } }
+
+.live-tag { color: #ef4444; font-weight: 700; font-size: 0.85rem; display: block; margin-bottom: 0.5rem;}
+.artist { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+.player-controls { display: flex; align-items: center; gap: 1rem; }
+.play-btn {
+    width: 50px; height: 50px; border-radius: 50%; border: none;
+    background: var(--gold); color: #000; font-size: 1.2rem; cursor: pointer;
+    box-shadow: 0 0 15px var(--gold); transition: transform 0.2s;
+}
+.play-btn:hover { transform: scale(1.1); }
+.ctrl-btn { background: transparent; border: none; color: var(--text-main); font-size: 1.2rem; cursor: pointer; }
+
+/* Visualizer bars */
+.sound-wave { display: flex; align-items: flex-end; height: 30px; gap: 3px; margin-left: 1rem;}
+.sound-wave span {
+    display: block; width: 4px; background: var(--patronus-blue); border-radius: 2px;
+    height: 5px; transition: height 0.1s ease;
+}
+
+/* --- TEAM SECTION --- */
+.team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2.5rem; }
+.frog-card { padding: 2rem 1.5rem; text-align: center; }
+
+.pentagon-frame {
+    width: 130px; height: 130px; margin: 0 auto 1.5rem auto;
+    clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+    background: var(--gold); padding: 3px;
+}
+.pentagon-frame img {
+    width: 100%; height: 100%; object-fit: cover;
+    clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+}
+
+.frog-card h3 { color: var(--gold); margin-bottom: 0.2rem; }
+.role { font-size: 0.85rem; color: var(--patronus-blue); margin-bottom: 1rem; text-transform: uppercase;}
+.member-stats { display: flex; flex-direction: column; gap: 4px; font-size: 0.8rem; color: var(--text-muted); border-top: 1px solid rgba(255,255,255,0.05); padding-top: 0.8rem;}
+
+/* --- FOOTER --- */
+footer { padding: 4rem 2rem; text-align: center; background: #04060A; border-top: 1px solid #1f2937; }
+.mischief { font-size: 1.8rem; color: var(--gold); margin-bottom: 0.5rem; }
+.disclaimer { font-size: 0.8rem; color: #64748b; }
+
+/* Responsive adjustments */
+@media(max-width: 768px) {
+    .nav-links { display: none; /* Put behind a hamburger in v2 */ }
+    .glitch-title { font-size: 2.8rem; }
+    .music-player-card { flex-direction: column; text-align: center; gap: 1.5rem; }
+    .sound-wave { margin: 0 auto; }
+}
